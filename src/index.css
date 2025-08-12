@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Rupal Adventures Design System - Mountain Expedition Theme */
+
+@layer base {
+  :root {
+    --background: 220 20% 98%;
+    --foreground: 220 25% 8%;
+
+    /* Mountain-inspired primary colors */
+    --primary: 220 50% 15%;
+    --primary-glow: 220 60% 25%;
+    --primary-foreground: 220 20% 98%;
+
+    /* Adventure accent colors */
+    --accent: 35 80% 60%;
+    --accent-glow: 35 90% 70%;
+    --accent-foreground: 220 25% 8%;
+
+    /* Mountain snow and ice */
+    --snow: 220 30% 95%;
+    --ice: 200 50% 85%;
+
+    /* Card and surface colors */
+    --card: 220 30% 99%;
+    --card-foreground: 220 25% 8%;
+
+    --popover: 220 30% 99%;
+    --popover-foreground: 220 25% 8%;
+
+    --secondary: 220 20% 92%;
+    --secondary-foreground: 220 25% 8%;
+
+    --muted: 220 15% 88%;
+    --muted-foreground: 220 20% 45%;
+
+    --destructive: 0 80% 55%;
+    --destructive-foreground: 220 20% 98%;
+
+    --border: 220 25% 88%;
+    --input: 220 25% 90%;
+    --ring: 220 50% 15%;
+
+    --radius: 0.75rem;
+
+    /* Custom adventure gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-mountain: linear-gradient(180deg, hsl(200 60% 85%), hsl(220 40% 75%));
+    --gradient-adventure: linear-gradient(45deg, hsl(var(--accent)), hsl(var(--accent-glow)));
+
+    /* Mountain shadows and depth */
+    --shadow-mountain: 0 20px 40px -10px hsl(var(--primary) / 0.3);
+    --shadow-expedition: 0 10px 25px -5px hsl(var(--accent) / 0.2);
+    --shadow-gentle: 0 4px 12px -2px hsl(var(--primary) / 0.1);
+
+    /* Adventure animations */
+    --transition-adventure: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s ease-in-out;
+  }
+
+  .dark {
+    --background: 220 30% 8%;
+    --foreground: 220 20% 95%;
+
+    --primary: 220 40% 85%;
+    --primary-glow: 220 50% 75%;
+    --primary-foreground: 220 30% 8%;
+
+    --accent: 35 75% 65%;
+    --accent-glow: 35 85% 75%;
+    --accent-foreground: 220 30% 8%;
+
+    --card: 220 25% 12%;
+    --card-foreground: 220 20% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 220 20% 95%;
+
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 220 20% 95%;
+
+    --muted: 220 15% 22%;
+    --muted-foreground: 220 15% 65%;
+
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 220 20% 95%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 18%;
+    --ring: 220 40% 85%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Adventure-themed scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--accent));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent-glow));
+  }
+}
+
+@layer components {
+  /* Adventure button styles */
+  .btn-adventure {
+    @apply bg-gradient-to-r from-accent to-accent-glow text-accent-foreground 
+           hover:shadow-expedition transform hover:scale-105 
+           transition-all duration-300 font-semibold;
+  }
+
+  .btn-mountain {
+    @apply bg-gradient-to-r from-primary to-primary-glow text-primary-foreground 
+           hover:shadow-mountain transform hover:scale-105 
+           transition-all duration-300 font-semibold;
+  }
+
+  /* Expedition card styles */
+  .card-expedition {
+    @apply bg-card border border-border rounded-lg shadow-gentle 
+           hover:shadow-expedition transform hover:scale-[1.02] 
+           transition-all duration-300;
+  }
+
+  /* Hero background pattern */
+  .bg-mountain-pattern {
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(var(--primary) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(var(--accent) / 0.05) 0%, transparent 50%);
+  }
+
+  /* Adventure section backgrounds */
+  .bg-adventure-gradient {
+    background: var(--gradient-adventure);
+  }
+
+  .bg-mountain-gradient {
+    background: var(--gradient-mountain);
+  }
+
+  .bg-hero-gradient {
+    background: var(--gradient-hero);
+  }
+}
