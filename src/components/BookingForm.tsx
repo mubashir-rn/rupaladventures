@@ -108,7 +108,7 @@ Best regards,
 ${formData.firstName} ${formData.lastName}
       `.trim();
 
-      const emailUrl = `mailto:mbsirsakar5@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+      const emailUrl = `mailto:info@rupaladventures.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
       toast({
         title: "Inquiry Prepared!",
@@ -372,7 +372,7 @@ ${formData.firstName} ${formData.lastName}
               type="button"
               variant="outline"
               size="lg"
-              onClick={() => window.location.href = 'mailto:mbsirsakar5@gmail.com'}
+              onClick={() => window.location.href = 'mailto:info@rupaladventures.com'}
               className="flex-1 sm:flex-none"
             >
               <Mail className="mr-2 h-4 w-4" />

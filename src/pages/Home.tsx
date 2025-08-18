@@ -114,7 +114,7 @@ const Home = () => {
             </div>
             <div className="flex items-center space-x-3">
               <Mail className="h-6 w-6" />
-              <span className="text-lg">mbsirsakar5@gmail.com</span>
+              <span className="text-lg">info@rupaladventures.com</span>
             </div>
           </div>
           
@@ -133,7 +133,7 @@ const Home = () => {
               variant="outline" 
               size="lg"
               className="bg-white/10 text-white border-white/30 hover:bg-white/20"
-              onClick={() => window.location.href = 'mailto:mbsirsakar5@gmail.com'}
+              onClick={() => window.location.href = 'mailto:info@rupaladventures.com'}
             >
               <Mail className="mr-2 h-5 w-5" />
               Send Email

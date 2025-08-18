@@ -1,11 +1,12 @@
 import Header from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  MapPin, 
+import ProfileImg from "../assets/CEORupalAdventures.png";
+import {
+  Phone,
+  Mail,
+  MessageCircle,
+  MapPin,
   Clock,
   User,
   Award,
@@ -16,7 +17,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Header Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 to-accent/10">
         <div className="max-w-4xl mx-auto text-center">
@@ -24,7 +25,7 @@ const Contact = () => {
             Contact Us
           </h1>
           <p className="text-xl text-muted-foreground">
-            Ready to embark on your mountain adventure? Get in touch with our expedition experts 
+            Ready to embark on your mountain adventure? Get in touch with our expedition experts
             and let us help you plan the perfect expedition.
           </p>
         </div>
@@ -37,7 +38,7 @@ const Contact = () => {
             {/* Contact Details */}
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-8">Get In Touch</h2>
-              
+
               <div className="space-y-6">
                 <Card className="p-6 hover:shadow-lg transition-shadow">
                   <div className="flex items-start space-x-4">
@@ -49,8 +50,8 @@ const Contact = () => {
                       <p className="text-muted-foreground mb-3">
                         Fastest way to reach us. Available 24/7 for expedition inquiries.
                       </p>
-                      <Button 
-                        variant="hero" 
+                      <Button
+                        variant="hero"
                         size="sm"
                         onClick={() => window.open('https://wa.me/923169457494', '_blank')}
                       >
@@ -70,12 +71,12 @@ const Contact = () => {
                       <p className="text-muted-foreground mb-3">
                         Send us your detailed expedition requirements and questions.
                       </p>
-                      <Button 
-                        variant="outline" 
+                      <Button
+                        variant="outline"
                         size="sm"
-                        onClick={() => window.location.href = 'mailto:mbsirsakar5@gmail.com'}
+                        onClick={() => window.location.href = 'mailto:info@rupaladventures.com'}
                       >
-                        mbsirsakar5@gmail.com
+                        info@rupaladventures.com
                       </Button>
                     </div>
                   </div>
@@ -89,7 +90,7 @@ const Contact = () => {
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-2">Location</h3>
                       <p className="text-muted-foreground">
-                        Based in Pakistan, we operate expeditions throughout the northern mountain regions 
+                        Based in Pakistan, we operate expeditions throughout the northern mountain regions
                         including Gilgit-Baltistan and the Karakoram and Himalaya ranges.
                       </p>
                     </div>
@@ -116,13 +117,17 @@ const Contact = () => {
             <div>
               <Card className="p-8 bg-gradient-to-br from-primary/5 to-accent/5 border-accent/20">
                 <div className="text-center mb-8">
-                  <div className="w-20 h-20 bg-adventure-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                    <User className="h-10 w-10 text-white" />
+                  <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4">
+                    <img
+                      src={ProfileImg}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <h2 className="text-2xl font-bold text-foreground mb-2">Mubashir Hussain</h2>
                   <p className="text-accent font-semibold mb-4">CEO & Expedition Leader</p>
                   <p className="text-muted-foreground leading-relaxed">
-                    With over 15 years of experience leading expeditions in Pakistan's most challenging mountains, 
+                    With over 15 years of experience leading expeditions in Pakistan's most challenging mountains,
                     Mubashir is dedicated to providing safe, professional, and unforgettable mountain adventures.
                   </p>
                 </div>
@@ -145,18 +150,18 @@ const Contact = () => {
                 <div className="mt-8 pt-6 border-t border-border">
                   <h3 className="text-lg font-semibold mb-4">Quick Contact</h3>
                   <div className="flex flex-col space-y-3">
-                    <Button 
-                      variant="hero" 
+                    <Button
+                      variant="hero"
                       className="w-full"
                       onClick={() => window.open('https://wa.me/923169457494', '_blank')}
                     >
                       <MessageCircle className="mr-2 h-4 w-4" />
                       Message on WhatsApp
                     </Button>
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       className="w-full"
-                      onClick={() => window.location.href = 'mailto:mbsirsakar5@gmail.com'}
+                      onClick={() => window.location.href = 'mailto:info@rupaladventures.com'}
                     >
                       <Mail className="mr-2 h-4 w-4" />
                       Send Email
@@ -200,8 +205,8 @@ const Contact = () => {
           <p className="text-lg mb-6 text-gray-200">
             Don't wait – the mountains are calling! Contact us today to begin planning your next great adventure.
           </p>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="lg"
             className="bg-white/10 text-white border-white/30 hover:bg-white/20"
             onClick={() => window.open('https://wa.me/923169457494', '_blank')}

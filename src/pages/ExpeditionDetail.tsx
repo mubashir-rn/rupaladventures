@@ -145,7 +145,7 @@ const ExpeditionDetail = () => {
                   variant="outline" 
                   size="lg" 
                   className="w-full"
-                  onClick={() => window.location.href = 'mailto:mbsirsakar5@gmail.com'}
+                  onClick={() => window.location.href = 'mailto:info@rupaladventures.com'}
                 >
                   Send Email Inquiry
                 </Button>
