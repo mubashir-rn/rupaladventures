@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mountain } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-mountain.jpg";
 import { Link } from "react-router-dom";
+import Logo from "@/components/Logo";
 
 const Hero = () => {
   return (
@@ -17,15 +18,13 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center mb-6">
-          <Mountain className="h-12 w-12 text-accent mr-4" />
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-            Rupal Adventures
-          </h1>
+          <Logo size="lg" />
         </div>
         
         <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-2xl mx-auto">
           Conquer the mighty peaks of Pakistan. From Nanga Parbat to Laila Peak, 
           embark on legendary expeditions with expert guides.
+         This company particularly lies in Culture/Sightseeing Tours, Trekking & Expeditions
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">

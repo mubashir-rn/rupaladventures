@@ -7,6 +7,8 @@ export interface Expedition {
   bestTime: string;
   shortDescription: string;
   details: string;
+  image: string;
+  images: string[];
   itinerary: Array<{
     day: string;
     description: string;
@@ -25,6 +27,8 @@ export const expeditions: Expedition[] = [
     difficulty: "Extreme",
     bestTime: "June - September",
     shortDescription: "Conquer the ninth highest mountain in the world, the legendary 'Killer Mountain' of the western Himalayas.",
+    image: "/src/assets/hero-mountain.jpg",
+    images: ["/src/assets/hero-mountain.jpg", "/src/assets/fairy-meadows.jpg"],
     details: `Nanga Parbat (literally in Sanskrit: Naked Mountain; is the ninth highest mountain in the world at 8,126 meters (26,660 ft) above sea level.
     
 It is the western anchor of the Himalayas around which the Indus river skirts into the plains of Pakistan. It is located in the disputed region of Kashmir with India and in Gilgit-Baltistan autonomous region of Pakistan and is locally known as 'Deo Mir' 'Deo' meaning 'huge') ('mir' meaning 'mountain').
@@ -60,6 +64,8 @@ The final push for the summit was dramatic: Buhl continued alone for the final 1
     difficulty: "Very Difficult",
     bestTime: "June - September",
     shortDescription: "Scale the distinctive spear-like peak in the heart of the Karakoram range.",
+    image: "/src/assets/laila-peak.jpg",
+    images: ["/src/assets/laila-peak.jpg", "/src/assets/hero-mountain.jpg"],
     details: `Laila Peak in Hushe Valley near Gondogoro Glacier is in Karakoram range and is 6,096 meters (20,000 ft) high. It has a distinctive spear-like shape. Its northwest face has a slope of 45 degrees in more than 1500 vertical meters.
 
 It has been climbed by Simon Yates among others. According to the local people in Hushe, Laila peak has been climbed only twice, a total of only seven people have submitted.
@@ -95,6 +101,8 @@ Frederik and Jörgen reached the base camp of Laila Peak (4150 meters) on June 1
     difficulty: "Moderate to Difficult",
     bestTime: "Mid June – September",
     shortDescription: "Experience the southern panorama of Nanga Parbat while crossing the challenging Mazeno Pass.",
+    image: "/src/assets/fairy-meadows.jpg",
+    images: ["/src/assets/fairy-meadows.jpg", "/src/assets/hero-mountain.jpg"],
     dailyWalking: "5-7 HRS except Longer Days While Crossing Pass",
     grade: "Moderate to Difficult",
     maxAltitude: "5399m",
@@ -117,6 +125,8 @@ Frederik and Jörgen reached the base camp of Laila Peak (4150 meters) on June 1
     difficulty: "Moderate to Difficult",
     bestTime: "Mid May – Mid of October",
     shortDescription: "Explore the mysteries of the Killer Mountain from the north with optional peak climbing.",
+    image: "/src/assets/fairy-meadows.jpg",
+    images: ["/src/assets/fairy-meadows.jpg", "/src/assets/hero-mountain.jpg"],
     dailyWalking: "3-5 HRS except Longer Days while driving Pass",
     grade: "Moderate to Difficult",
     maxAltitude: "5245m",
@@ -139,6 +149,8 @@ Visit memorial of German climbers killed in 1937 and explore around the base cam
     difficulty: "Moderate to Difficult",
     bestTime: "June - September",
     shortDescription: "Explore the beautiful southern panorama of Nanga Parbat and climb Shaigiri Peak.",
+    image: "/src/assets/hero-mountain.jpg",
+    images: ["/src/assets/hero-mountain.jpg", "/src/assets/laila-peak.jpg"],
     details: `Explore the beautiful southern panorama of Nanga Parbat. Walking through the scenic Rupal Valley and meeting people in the summer settlements with fresh water, firewood and superb views of the Rupal Face of Nanga Parbat.
 
 Two days walk from the jump-off point at Tarashing, takes you to the beautiful camp of Shaigiri (5584m) provide magnificent views across the valley of Nanga Parbat. Return jeep drive through the narrow Astore gorge is a very interesting and road journey to the beautiful Hunza Valley takes you close to the Karakorum giants like Rakaposhi (7788m), Diran (7237m), unclimbed Ultar (7388m) and many other above 7000 meters.`,

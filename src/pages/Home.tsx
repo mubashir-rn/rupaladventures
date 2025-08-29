@@ -1,11 +1,14 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import ExpeditionCard from "@/components/ExpeditionCard";
+import ExpeditionShowcase from "@/components/ExpeditionShowcase";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { expeditions } from "@/data/expeditions";
 import { ArrowRight, Award, Users, Shield, Phone, Mail, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import Logo from "@/components/Logo";
+import LogoWatermark from "@/components/LogoWatermark";
 
 const Home = () => {
   // Show first 3 expeditions on home page
@@ -16,22 +19,34 @@ const Home = () => {
       <Header />
       <Hero />
       
-      {/* Featured Expeditions Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary/20">
-        <div className="max-w-7xl mx-auto">
+            {/* Featured Expeditions Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary/20">
+        {/* Logo Watermark */}
+        <LogoWatermark opacity={0.02} size="lg" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Featured Expeditions
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Discover our most popular mountain expeditions, from challenging 8000m peaks 
-              to spectacular trekking adventures in the heart of Pakistan's mountains.
-            </p>
+          <div className="flex justify-center mb-6">
+            <Logo size="lg" />
           </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+            Featured Expeditions
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Discover our most popular mountain expeditions, from challenging 8000m peaks 
+            to spectacular trekking adventures in the heart of Pakistan's mountains.
+          </p>
+        </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {featuredExpeditions.map((expedition) => (
-              <ExpeditionCard key={expedition.id} expedition={expedition} />
+              <ExpeditionShowcase 
+                key={expedition.id} 
+                expedition={expedition}
+                variant="featured"
+                showLogo={true}
+                showActions={true}
+              />
             ))}
           </div>
           
@@ -148,6 +163,7 @@ const Home = () => {
       </section>
       
       <WhatsAppFloat />
+      <Footer />
     </div>
   );
 };

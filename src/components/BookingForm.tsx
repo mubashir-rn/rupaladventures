@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/select";
 import { MessageCircle, Mail, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
+import { supabase } from "@/lib/supabaseClient";
 
 interface BookingFormProps {
   expeditionName?: string;
@@ -21,6 +23,8 @@ interface BookingFormProps {
 
 const BookingForm = ({ expeditionName, onClose }: BookingFormProps) => {
   const { toast } = useToast();
+  const { user, isAuthenticated } = useAuth();
+  const [debugMode, setDebugMode] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -36,6 +40,18 @@ const BookingForm = ({ expeditionName, onClose }: BookingFormProps) => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Pre-fill form with user data if authenticated
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      setFormData(prev => ({
+        ...prev,
+        firstName: user.name?.split(' ')[0] || '',
+        lastName: user.name?.split(' ').slice(1).join(' ') || '',
+        email: user.email || ''
+      }));
+    }
+  }, [isAuthenticated, user]);
+
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
       ...prev,
@@ -47,7 +63,7 @@ const BookingForm = ({ expeditionName, onClose }: BookingFormProps) => {
     e.preventDefault();
     
     // Validate required fields
-    const requiredFields = ['firstName', 'lastName', 'phone', 'email', 'city', 'organization', 'country'];
+    const requiredFields = ['firstName', 'lastName', 'phone', 'email', 'city', 'country'];
     const missingFields = requiredFields.filter(field => !formData[field as keyof typeof formData]);
     
     if (missingFields.length > 0) {
@@ -62,6 +78,112 @@ const BookingForm = ({ expeditionName, onClose }: BookingFormProps) => {
     setIsSubmitting(true);
 
     try {
+      console.log('Attempting to save inquiry with data:', formData);
+      
+      // Try to save inquiry to Supabase (regardless of authentication)
+      let inquiryData = null;
+      let inquiryError = null;
+      
+      try {
+        const result = await supabase
+          .from('inquiries')
+          .insert({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            phone: formData.phone,
+            email: formData.email,
+            city: formData.city,
+            province: formData.province || null,
+            organization: formData.organization || null,
+            country: formData.country,
+            subject: formData.subject || null,
+            message: formData.message || null
+          })
+          .select();
+        
+        inquiryData = result.data;
+        inquiryError = result.error;
+      } catch (tableError) {
+        console.error('Table access error:', tableError);
+        inquiryError = {
+          message: 'Table "inquiries" does not exist. Please run the database setup script first.',
+          code: 'TABLE_NOT_FOUND'
+        };
+      }
+
+      if (inquiryError) {
+        console.error('Inquiry database error:', inquiryError);
+        console.error('Error details:', {
+          message: inquiryError.message,
+          details: inquiryError.details,
+          hint: inquiryError.hint,
+          code: inquiryError.code
+        });
+        if (inquiryError.code === 'TABLE_NOT_FOUND') {
+          // Fallback: Save to localStorage temporarily
+          const tempInquiries = JSON.parse(localStorage.getItem('tempInquiries') || '[]');
+          tempInquiries.push({
+            ...formData,
+            timestamp: new Date().toISOString(),
+            id: Date.now()
+          });
+          localStorage.setItem('tempInquiries', JSON.stringify(tempInquiries));
+          
+          toast({
+            title: "Inquiry Saved Locally",
+            description: "Your inquiry has been saved locally. It will be transferred to the database once setup is complete.",
+            variant: "default"
+          });
+          
+          // Continue with the rest of the process
+        } else {
+          toast({
+            title: "Database Error",
+            description: `Failed to save inquiry: ${inquiryError.message}`,
+            variant: "destructive"
+          });
+          return;
+        }
+      }
+
+      console.log('Inquiry saved successfully:', inquiryData);
+
+      // Save booking to Supabase if user is authenticated
+      if (isAuthenticated && user) {
+        const { error: dbError } = await supabase
+          .from('bookings')
+          .insert({
+            user_id: user.id,
+            expedition_name: formData.subject,
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            phone: formData.phone,
+            email: formData.email,
+            city: formData.city,
+            province: formData.province,
+            organization: formData.organization,
+            country: formData.country,
+            message: formData.message,
+            status: 'pending'
+          });
+
+        if (dbError) {
+          console.error('Booking database error:', dbError);
+          // Don't return here as inquiry was already saved
+        } else {
+          toast({
+            title: "Booking Saved!",
+            description: "Your booking has been saved to our system.",
+          });
+        }
+      } else {
+        // Show success message for non-authenticated users
+        toast({
+          title: "Inquiry Saved!",
+          description: "Your inquiry has been saved to our system. We'll get back to you soon!",
+        });
+      }
+
       // Create WhatsApp message
       const message = `
 🏔️ EXPEDITION INQUIRY - ${formData.subject || 'General Inquiry'}
@@ -145,6 +267,7 @@ ${formData.firstName} ${formData.lastName}
       }
 
     } catch (error) {
+      console.error('Booking error:', error);
       toast({
         title: "Error",
         description: "There was an issue preparing your inquiry. Please try again.",
@@ -164,6 +287,52 @@ ${formData.firstName} ${formData.lastName}
         <p className="text-muted-foreground">
           Please fill in the form below to get in touch with us regarding this trip.
         </p>
+        
+        {/* Authentication Status */}
+        <div className="mt-4 p-4 rounded-lg border">
+          {isAuthenticated ? (
+            <div className="flex items-center justify-center gap-2 text-green-600">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span className="text-sm font-medium">
+                Logged in as {user?.name} - Your booking will be saved to your account
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-2 text-amber-600">
+              <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+              <span className="text-sm">
+                Not logged in - 
+                <button 
+                  type="button" 
+                  onClick={() => window.location.href = '/auth'}
+                  className="text-blue-600 hover:underline ml-1 font-medium"
+                >
+                  Sign in to save your booking
+                </button>
+              </span>
+            </div>
+          )}
+          
+          {/* Debug Mode Toggle */}
+          <div className="mt-3 flex items-center justify-center">
+            <button
+              type="button"
+              onClick={() => setDebugMode(!debugMode)}
+              className="text-xs text-gray-500 hover:text-gray-700 underline"
+            >
+              {debugMode ? 'Hide Debug Info' : 'Show Debug Info'}
+            </button>
+          </div>
+          
+          {debugMode && (
+            <div className="mt-3 p-3 bg-gray-100 rounded text-xs">
+              <div><strong>Debug Info:</strong></div>
+              <div>Supabase URL: {process.env.NODE_ENV === 'development' ? 'Connected' : 'Production'}</div>
+              <div>User ID: {user?.id || 'Not authenticated'}</div>
+              <div>Form Data: {JSON.stringify(formData, null, 2)}</div>
+            </div>
+          )}
+        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -252,16 +421,15 @@ ${formData.firstName} ${formData.lastName}
           
           <div className="space-y-2">
             <Label htmlFor="province" className="text-sm font-medium">
-              Province/State <span className="text-destructive">*</span>
+              Province/State
             </Label>
             <Input
               id="province"
               type="text"
               value={formData.province}
               onChange={(e) => handleInputChange('province', e.target.value)}
-              required
               className="w-full"
-              placeholder="Your province or state"
+              placeholder="Your province or state (optional)"
             />
           </div>
         </div>
@@ -270,16 +438,15 @@ ${formData.firstName} ${formData.lastName}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-2">
             <Label htmlFor="organization" className="text-sm font-medium">
-              Organization <span className="text-destructive">*</span>
+              Organization
             </Label>
             <Input
               id="organization"
               type="text"
               value={formData.organization}
               onChange={(e) => handleInputChange('organization', e.target.value)}
-              required
               className="w-full"
-              placeholder="Your organization or company"
+              placeholder="Your organization or company (optional)"
             />
           </div>
           

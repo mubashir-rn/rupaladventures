@@ -1,15 +1,31 @@
 import Header from "@/components/Header";
-import ExpeditionCard from "@/components/ExpeditionCard";
+import ExpeditionShowcase from "@/components/ExpeditionShowcase";
 import { expeditions } from "@/data/expeditions";
+import Logo from "@/components/Logo";
+import LogoWatermark from "@/components/LogoWatermark";
+import Footer from "@/components/Footer";
 
 const Expeditions = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Header Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 to-accent/10">
-        <div className="max-w-7xl mx-auto text-center">
+      {/* Header Section with Background Image */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+          style={{ backgroundImage: `url('/src/assets/hero-mountain.jpg')` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
+        
+        {/* Logo Watermark */}
+        <LogoWatermark opacity={0.03} size="xl" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto text-center">
+          <div className="flex justify-center mb-6">
+            <Logo size="lg" />
+          </div>
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
             Our Expeditions
           </h1>
@@ -25,7 +41,13 @@ const Expeditions = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {expeditions.map((expedition) => (
-              <ExpeditionCard key={expedition.id} expedition={expedition} />
+              <ExpeditionShowcase 
+                key={expedition.id} 
+                expedition={expedition}
+                variant="default"
+                showLogo={true}
+                showActions={true}
+              />
             ))}
           </div>
         </div>
@@ -48,6 +70,8 @@ const Expeditions = () => {
           </button>
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 };

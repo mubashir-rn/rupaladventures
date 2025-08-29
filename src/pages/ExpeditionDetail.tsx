@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { expeditions } from "@/data/expeditions";
+import ImageCarousel from "@/components/ImageCarousel";
+import ExpeditionDetailLogo from "@/components/ExpeditionDetailLogo";
+import Footer from "@/components/Footer";
 import { 
   Mountain, 
   Clock, 
@@ -59,9 +62,16 @@ const ExpeditionDetail = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 to-accent/10">
-        <div className="max-w-6xl mx-auto">
+      {/* Hero Section with Image */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          style={{ backgroundImage: `url(${expedition.image || '/src/assets/hero-mountain.jpg'})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
+        
+        <div className="relative z-10 max-w-6xl mx-auto">
           <Link to="/expeditions" className="inline-flex items-center text-accent hover:text-accent-glow mb-6 transition-colors">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Expeditions
@@ -70,7 +80,7 @@ const ExpeditionDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
-                <Mountain className="h-8 w-8 text-accent" />
+                <ExpeditionDetailLogo size="sm" />
                 <Badge variant="secondary" className="text-sm">
                   {expedition.altitude}
                 </Badge>
@@ -161,6 +171,26 @@ const ExpeditionDetail = () => {
         </div>
       </section>
 
+      {/* Image Gallery */}
+      {expedition.images && expedition.images.length > 0 && (
+        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-secondary/10">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Expedition Gallery</h2>
+            <div className="max-w-4xl mx-auto">
+              <ImageCarousel
+                images={expedition.images}
+                alt={expedition.name}
+                autoPlay={true}
+                interval={4000}
+                showControls={true}
+                showIndicators={true}
+                className="h-96"
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Details & Itinerary */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
@@ -245,6 +275,8 @@ const ExpeditionDetail = () => {
           <BookingForm expeditionName={expedition.name} />
         </div>
       </section>
+      
+      <Footer />
     </div>
   );
 };

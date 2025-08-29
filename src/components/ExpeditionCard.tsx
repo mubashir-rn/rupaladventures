@@ -1,9 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Mountain, Clock, TrendingUp, Calendar } from "lucide-react";
+import { Clock, TrendingUp, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Expedition } from "@/data/expeditions";
+import LogoImage from "@/components/LogoImage";
 
 interface ExpeditionCardProps {
   expedition: Expedition;
@@ -27,19 +28,38 @@ const ExpeditionCard = ({ expedition }: ExpeditionCardProps) => {
     }
   };
 
+  // Use expedition image from data
+  const expeditionImage = expedition.image || '/src/assets/hero-mountain.jpg';
+
   return (
     <Card className="card-expedition overflow-hidden h-full flex flex-col">
-      <div className="bg-gradient-to-br from-primary/10 to-accent/10 p-6">
+      {/* Expedition Image */}
+      <div className="relative h-48 overflow-hidden">
+        <img
+          src={expeditionImage}
+          alt={expedition.name}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+        />
+        {/* Rupal Adventures Logo Overlay */}
+        <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-lg">
+          <LogoImage size="sm" />
+        </div>
+        {/* Difficulty Badge Overlay */}
+        <div className="absolute top-3 left-3">
+          <Badge className={getDifficultyColor(expedition.difficulty)}>
+            {expedition.difficulty}
+          </Badge>
+        </div>
+      </div>
+      
+              <div className="bg-gradient-to-br from-primary/10 to-accent/10 p-6">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center space-x-2">
-            <Mountain className="h-6 w-6 text-accent" />
+            <LogoImage size="sm" />
             <Badge variant="secondary" className="text-xs">
               {expedition.altitude}
             </Badge>
           </div>
-          <Badge className={getDifficultyColor(expedition.difficulty)}>
-            {expedition.difficulty}
-          </Badge>
         </div>
         
         <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">
