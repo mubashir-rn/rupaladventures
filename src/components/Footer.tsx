@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin, Mountain } from "lucide-react";
+import { Phone, Mail, MapPin, Mountain, Facebook } from "lucide-react";
 import Logo from "@/components/Logo";
 
 const Footer = () => {
@@ -12,7 +12,7 @@ const Footer = () => {
               <Logo size="lg" />
             </div>
             <p className="text-muted-foreground mb-6 max-w-md">
-              Conquer the mighty peaks of Pakistan with Rupal Adventures. From Nanga Parbat to Laila Peak, 
+              Conquer the mighty peaks of Pakistan with <span className="font-bold">Rupal Adventures</span>. From Nanga Parbat to Laila Peak, 
               embark on legendary expeditions with expert guides and unforgettable experiences.
             </p>
             <div className="flex space-x-4">
@@ -24,6 +24,9 @@ const Footer = () => {
               </a>
               <a href="#" className="text-accent hover:text-accent-glow transition-colors">
                 <MapPin className="h-5 w-5" />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61579164075542" target="_blank" rel="noopener noreferrer" className="text-accent hover:text-accent-glow transition-colors">
+                <Facebook className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -78,7 +81,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            © 2024 Rupal Adventures. All rights reserved.
+            © 2024 <span className="font-bold">Rupal Adventures</span>. All rights reserved.
           </p>
           <div className="flex items-center space-x-2 mt-4 md:mt-0">
             <Mountain className="h-4 w-4 text-accent" />

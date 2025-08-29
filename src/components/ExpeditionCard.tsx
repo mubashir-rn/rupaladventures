@@ -5,6 +5,7 @@ import { Clock, TrendingUp, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Expedition } from "@/data/expeditions";
 import LogoImage from "@/components/LogoImage";
+import heroMountain from "@/assets/hero-mountain.jpg";
 
 interface ExpeditionCardProps {
   expedition: Expedition;
@@ -28,8 +29,8 @@ const ExpeditionCard = ({ expedition }: ExpeditionCardProps) => {
     }
   };
 
-  // Use expedition image from data
-  const expeditionImage = expedition.image || '/src/assets/hero-mountain.jpg';
+  // Use expedition image from data, fallback to imported asset
+  const expeditionImage = expedition.image || heroMountain;
 
   return (
     <Card className="card-expedition overflow-hidden h-full flex flex-col">
