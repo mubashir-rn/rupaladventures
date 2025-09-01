@@ -3,21 +3,67 @@ import Hero from "@/components/Hero";
 import ExpeditionShowcase from "@/components/ExpeditionShowcase";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { expeditions } from "@/data/expeditions";
 import { ArrowRight, Award, Users, Shield, Phone, Mail, MessageCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import Logo from "@/components/Logo";
 import LogoWatermark from "@/components/LogoWatermark";
+import heroMountain from "@/assets/hero-mountain.jpg";
 
 const Home = () => {
   // Show first 3 expeditions on home page
   const featuredExpeditions = expeditions.slice(0, 3);
 
+  // Structured data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Rupal Adventures",
+    "description": "Expert-led mountain expeditions and treks in Pakistan. Conquer Nanga Parbat, Laila Peak and more with professional guides.",
+    "url": "https://rupaladventures.com",
+    "logo": "https://rupaladventures.com/src/assets/logo.png",
+    "image": "https://rupaladventures.com/src/assets/hero-mountain.jpg",
+    "telephone": "+92-316-9457494",
+    "email": "info@rupaladventures.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "Pakistan"
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "Mubashir Hussain"
+    },
+    "serviceArea": {
+      "@type": "Country",
+      "name": "Pakistan"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Mountain Expeditions",
+      "itemListElement": featuredExpeditions.map((expedition, index) => ({
+        "@type": "Offer",
+        "position": index + 1,
+        "name": expedition.name,
+        "description": expedition.shortDescription,
+        "url": `https://rupaladventures.com/expeditions/${expedition.id}`
+      }))
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <Hero />
+    <>
+      <SEO
+        title="Rupal Adventures - Best Mountain Expeditions in Pakistan | Nanga Parbat & Laila Peak"
+        description="Join Rupal Adventures for the best mountain expeditions in Pakistan. Expert guides, 15+ years experience. Conquer Nanga Parbat (8126m), Laila Peak (6096m) and more. Book your adventure today!"
+        image={heroMountain}
+        url="/"
+        structuredData={structuredData}
+      />
+      <div className="min-h-screen bg-background">
+        <Header />
+        <Hero />
       
             {/* Featured Expeditions Section */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-secondary/20">
@@ -162,9 +208,10 @@ const Home = () => {
         </div>
       </section>
       
-      <WhatsAppFloat />
-      <Footer />
-    </div>
+        <WhatsAppFloat />
+        <Footer />
+      </div>
+    </>
   );
 };
 

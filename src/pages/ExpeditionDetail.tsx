@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import Header from "@/components/Header";
 import BookingForm from "@/components/BookingForm";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -27,17 +28,24 @@ const ExpeditionDetail = () => {
 
   if (!expedition) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <div className="flex items-center justify-center min-h-[50vh]">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold mb-4">Expedition Not Found</h1>
-            <Link to="/expeditions">
-              <Button variant="default">Back to Expeditions</Button>
-            </Link>
+      <>
+        <SEO
+          title="Expedition Not Found | Rupal Adventures"
+          description="The requested expedition could not be found. Browse our complete list of mountain expeditions in Pakistan."
+          url="/expeditions"
+        />
+        <div className="min-h-screen bg-background">
+          <Header />
+          <div className="flex items-center justify-center min-h-[50vh]">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold mb-4">Expedition Not Found</h1>
+              <Link to="/expeditions">
+                <Button variant="default">Back to Expeditions</Button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -58,9 +66,42 @@ const ExpeditionDetail = () => {
     }
   };
 
+  // Structured data for expedition detail
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    "name": expedition.name,
+    "description": expedition.shortDescription,
+    "url": `https://rupaladventures.com/expeditions/${expedition.id}`,
+    "image": expedition.image,
+    "provider": {
+      "@type": "TravelAgency",
+      "name": "Rupal Adventures",
+      "url": "https://rupaladventures.com"
+    },
+    "offers": {
+      "@type": "Offer",
+      "availability": "https://schema.org/InStock",
+      "priceCurrency": "USD"
+    },
+    "itinerary": expedition.itinerary.map(item => ({
+      "@type": "TouristTrip",
+      "name": item.day,
+      "description": item.description
+    }))
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <>
+      <SEO
+        title={`${expedition.name} | Rupal Adventures - Mountain Expedition in Pakistan`}
+        description={`Join ${expedition.name} with Rupal Adventures. ${expedition.shortDescription} Duration: ${expedition.duration}. Difficulty: ${expedition.difficulty}. Book your mountain adventure today!`}
+        image={expedition.image}
+        url={`/expeditions/${expedition.id}`}
+        structuredData={structuredData}
+      />
+      <div className="min-h-screen bg-background">
+        <Header />
       
       {/* Hero Section with Image */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
@@ -277,7 +318,8 @@ const ExpeditionDetail = () => {
       </section>
       
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

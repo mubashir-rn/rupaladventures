@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import ProfileImg from "../assets/CEORupalAdventures.png";
@@ -12,11 +13,19 @@ import {
   Award,
   Mountain
 } from "lucide-react";
+import heroMountain from "@/assets/hero-mountain.jpg";
 
 const Contact = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <>
+      <SEO
+        title="Contact Rupal Adventures - Book Your Mountain Expedition in Pakistan"
+        description="Contact Rupal Adventures for expert mountain expedition planning in Pakistan. Call +92-316-9457494 or email info@rupaladventures.com. Book Nanga Parbat, Laila Peak and more adventures today!"
+        image={heroMountain}
+        url="/contact"
+      />
+      <div className="min-h-screen bg-background">
+        <Header />
 
       {/* Header Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 to-accent/10">
@@ -215,7 +224,8 @@ const Contact = () => {
           </Button>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 };
 

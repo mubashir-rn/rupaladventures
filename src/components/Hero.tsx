@@ -11,6 +11,8 @@ const Hero = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
+        role="img"
+        aria-label="Mountain landscape background"
       >
         <div className="absolute inset-0 bg-black/40"></div>
       </div>

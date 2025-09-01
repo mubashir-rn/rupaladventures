@@ -5,6 +5,7 @@ import { Clock, TrendingUp, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Expedition } from "@/data/expeditions";
 import LogoImage from "@/components/LogoImage";
+import OptimizedImage from "@/components/OptimizedImage";
 import heroMountain from "@/assets/hero-mountain.jpg";
 
 interface ExpeditionCardProps {
@@ -36,10 +37,12 @@ const ExpeditionCard = ({ expedition }: ExpeditionCardProps) => {
     <Card className="card-expedition overflow-hidden h-full flex flex-col">
       {/* Expedition Image */}
       <div className="relative h-48 overflow-hidden">
-        <img
+        <OptimizedImage
           src={expeditionImage}
           alt={expedition.name}
           className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         {/* Rupal Adventures Logo Overlay */}
         <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-lg">

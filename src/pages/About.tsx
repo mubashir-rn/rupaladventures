@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { 
@@ -12,11 +13,19 @@ import {
   MessageCircle
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import heroMountain from "@/assets/hero-mountain.jpg";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <>
+      <SEO
+        title="About Rupal Adventures - Expert Mountain Guides in Pakistan | 15+ Years Experience"
+        description="Learn about Rupal Adventures, Pakistan's premier mountain expedition company. 15+ years of experience, expert local guides, and safety-first approach for unforgettable mountain adventures."
+        image={heroMountain}
+        url="/about"
+      />
+      <div className="min-h-screen bg-background">
+        <Header />
       
       {/* Header Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 to-accent/10">
@@ -271,7 +280,8 @@ const About = () => {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -1,14 +1,50 @@
 import Header from "@/components/Header";
 import ExpeditionShowcase from "@/components/ExpeditionShowcase";
+import SEO from "@/components/SEO";
 import { expeditions } from "@/data/expeditions";
 import Logo from "@/components/Logo";
 import LogoWatermark from "@/components/LogoWatermark";
 import Footer from "@/components/Footer";
+import heroMountain from "@/assets/hero-mountain.jpg";
 
 const Expeditions = () => {
+  // Structured data for expeditions page
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Mountain Expeditions in Pakistan",
+    "description": "Complete list of mountain expeditions and trekking adventures in Pakistan including Nanga Parbat, Laila Peak and more.",
+    "url": "https://rupaladventures.com/expeditions",
+    "numberOfItems": expeditions.length,
+    "itemListElement": expeditions.map((expedition, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "TouristTrip",
+        "name": expedition.name,
+        "description": expedition.shortDescription,
+        "url": `https://rupaladventures.com/expeditions/${expedition.id}`,
+        "image": expedition.image,
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "USD"
+        }
+      }
+    }))
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <>
+      <SEO
+        title="Mountain Expeditions in Pakistan | Nanga Parbat, Laila Peak & More"
+        description="Discover all mountain expeditions in Pakistan with Rupal Adventures. From Nanga Parbat (8126m) to Laila Peak (6096m), explore our complete range of trekking and climbing adventures."
+        image={heroMountain}
+        url="/expeditions"
+        structuredData={structuredData}
+      />
+      <div className="min-h-screen bg-background">
+        <Header />
       
       {/* Header Section with Background Image */}
       <section className="relative py-20 px-4 sm:px-6 lg:px-8">
@@ -72,7 +108,8 @@ const Expeditions = () => {
       </section>
       
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 
