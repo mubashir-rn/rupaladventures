@@ -29,6 +29,7 @@ const SEO = ({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
       <meta name="author" content="Rupal Adventures" />
+      <meta name="reply-to" content="info@rupaladventures.com, rupaladventures@gmail.com" />
       <meta name="robots" content="index, follow" />
       <meta name="language" content="English" />
       <meta name="revisit-after" content="7 days" />
@@ -57,6 +58,9 @@ const SEO = ({
       <meta name="twitter:image" content={image} />
       <meta name="twitter:site" content="@rupaladventures" />
       <meta name="twitter:creator" content="@rupaladventures" />
+      
+      {/* Google Search Console Verification */}
+      <meta name="google-site-verification" content="PxwU43utpAh80PueqZheClHImYeEBRGPJxfPaQrzfuw" />
       
       {/* Additional SEO Meta Tags */}
       <meta name="geo.region" content="PK" />

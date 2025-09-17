@@ -97,7 +97,8 @@ const BookingForm = ({ expeditionName, onClose }: BookingFormProps) => {
             organization: formData.organization || null,
             country: formData.country,
             subject: formData.subject || null,
-            message: formData.message || null
+            message: formData.message || null,
+            user_id: (isAuthenticated && user?.id) ? user.id : null
           })
           .select();
         

@@ -175,7 +175,7 @@ const Home = () => {
             </div>
             <div className="flex items-center space-x-3">
               <Mail className="h-6 w-6" />
-              <span className="text-lg">info@rupaladventures.com</span>
+              <span className="text-lg">info@rupaladventures.com • rupaladventures@gmail.com</span>
             </div>
           </div>
           

@@ -19,6 +19,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Posts = lazy(() => import("./pages/Posts"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Bookings = lazy(() => import("./pages/Bookings"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -49,6 +50,7 @@ const App = () => (
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/bookings" element={<Bookings />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

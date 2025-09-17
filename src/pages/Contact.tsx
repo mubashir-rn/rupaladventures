@@ -20,7 +20,7 @@ const Contact = () => {
     <>
       <SEO
         title="Contact Rupal Adventures - Book Your Mountain Expedition in Pakistan"
-        description="Contact Rupal Adventures for expert mountain expedition planning in Pakistan. Call +92-316-9457494 or email info@rupaladventures.com. Book Nanga Parbat, Laila Peak and more adventures today!"
+        description="Contact Rupal Adventures for expert mountain expedition planning in Pakistan. Call +92-316-9457494 or email info@rupaladventures.com or rupaladventures@gmail.com. Book Nanga Parbat, Laila Peak and more adventures today!"
         image={heroMountain}
         url="/contact"
       />
@@ -87,6 +87,15 @@ const Contact = () => {
                       >
                         info@rupaladventures.com
                       </Button>
+                      <div className="mt-2">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => window.location.href = 'mailto:rupaladventures@gmail.com'}
+                        >
+                          rupaladventures@gmail.com
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </Card>
@@ -173,8 +182,18 @@ const Contact = () => {
                       onClick={() => window.location.href = 'mailto:info@rupaladventures.com'}
                     >
                       <Mail className="mr-2 h-4 w-4" />
-                      Send Email
+                      Send Email (info@)
                     </Button>
+                    <div className="mt-2">
+                      <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => window.location.href = 'mailto:rupaladventures@gmail.com'}
+                      >
+                        <Mail className="mr-2 h-4 w-4" />
+                        Send Email (Gmail)
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </Card>

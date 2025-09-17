@@ -22,6 +22,9 @@ const Footer = () => {
               <a href="mailto:info@rupaladventures.com" className="text-accent hover:text-accent-glow transition-colors">
                 <Mail className="h-5 w-5" />
               </a>
+              <a href="mailto:rupaladventures@gmail.com" className="text-accent hover:text-accent-glow transition-colors">
+                <Mail className="h-5 w-5" />
+              </a>
               <a href="#" className="text-accent hover:text-accent-glow transition-colors">
                 <MapPin className="h-5 w-5" />
               </a>
@@ -55,6 +58,11 @@ const Footer = () => {
                   Contact
                 </a>
               </li>
+              <li>
+                <a href="/privacy-policy" className="text-muted-foreground hover:text-foreground transition-colors">
+                  Privacy Policy
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -68,7 +76,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-accent" />
-                <span className="text-sm text-muted-foreground">info@rupaladventures.com</span>
+                <span className="text-sm text-muted-foreground">info@rupaladventures.com • rupaladventures@gmail.com</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Mountain className="h-4 w-4 text-accent" />
