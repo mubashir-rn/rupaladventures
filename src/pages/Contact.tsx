@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import ProfileImg from "../assets/CEORupalAdventures.png";
+import ProfileImg from "../assets/CEORupalAdventures.jpeg";
 import {
   Phone,
   Mail,
